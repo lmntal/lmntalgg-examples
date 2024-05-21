@@ -1,0 +1,12 @@
+<h4>Typical Context-Sensitive Language</h4>
+<p>\(a^n b^n c^n\) is known as a typical context-sensitive language. However it can be expressed as a context-free ShapeType.</p>
+<pre>
+defshape s(R){
+  s(R) :- s(A,A,B,B,C,C,R).
+  s(R) :- n(R).
+  s(A1,A2,B1,B2,C1,C2,R)
+    :- s(a(A1),A2,b(B1),B2,c(C1),C2,R).
+  s(A1,A2,B1,B2,C1,C2,R)
+    :- a(A1,R), b(B1,A2), c(C1,B2), n(C2).
+}
+</pre>

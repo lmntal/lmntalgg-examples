@@ -1,0 +1,88 @@
+<% include common/_header %>
+
+<style>
+body {
+  padding-top: 70px;
+  background-color: #eee;
+  margin-bottom: 10px;
+  margin:0;
+  width: 100%;
+}
+#container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+article {
+  border-radius : 10px;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+pre {
+  margin: 0;
+  padding: 10px;
+  border-radius : 10px;
+  background-color: #eee;
+}
+footer{
+  margin: 20px auto;
+}
+footer>*{
+  margin-bottom: 5px;
+}
+section{
+  display: block;
+  padding-top: 70px;
+  margin-top: -50px;
+}
+section>p{
+  margin-bottom: 10px;
+}
+a{
+  color: rgb(0, 82, 183)
+}
+</style>
+
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
+  <a href="#" class="navbar-brand">LMNtal ShapeType Examples</a>
+  <button class="navbar-toggler" type="button"
+      data-toggle="collapse"
+      data-target="#navmenu1"
+      aria-controls="navmenu1"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navmenu1">
+    <div class="navbar-nav">
+    <% for(const s of sects){ %>
+      <a class="nav-item nav-link" href="#<%= s.name %>"><%= s.name %></a>
+    <% } %>
+    </div>
+  </div>
+</nav>
+
+<div id="container" class="container-fluid">
+  <h2>Example Type Definitions of LMNtal ShapeType</h2>
+  <p>Our type checking framework, LMNtal ShapeType, can express various graph structures.</p>
+  <p><a href="https://github.com/lmntal/shapetype">For more examples and the prototype implementation of the type checker, click here and access our GitHub repository.</a></p>
+
+  <% for(const s of sects){ %>
+  <section id="<%= s.name %>">
+  <h3><%= s.title %></h3>
+  <p><%= s.desc %></p>
+  <% for(const f of s.files){ %>
+  <article id="<%= f %>">
+  <%- include(`contents/${f}`); %>
+  </article>
+  <% } %>
+  </section>
+  <% } %>
+  <footer>
+    <address>
+      Contact me: yamamoto (at) ueda.info.waseda.ac.jp
+    </address>
+    <p>Last modified: <%= date %></p>
+  </footer>
+</div>
+<% include common/_footer %>

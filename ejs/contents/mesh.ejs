@@ -1,0 +1,23 @@
+<h4>Lattice Graph (Mesh Graph, Grid Graph)</h4>
+<p>is a two-dimensional array of nodes. The following type has <em>no roots</em>, and lattice points are represented as c/4 atoms. The edges of a lattice graph are terminated by e/1 atoms.</p>
+<pre>
+defshape mesh(){
+  mesh :- c(r,d,e,e).
+  r(R) :- c(r,h,R,e).
+  r(R) :- c(e,rd,R,e).
+  d(R) :- c(e,d,h,R).
+  d(R) :- c(dr,e,e,R).
+  rd(R) :- c(e,rd,h,R).
+  dr(R) :- c(dr,e,R,h).
+  rd(R1), dr(R2) :- c(e,e,R2,R1).
+  c(H1,V1,W1,N1), c(E1,h,H1,N2), c(H2,S1,W2,V1), c(E2,S2,H2,h)
+    :- c(H1,V1,W1,N1), c(E1,V2,H1,N2), c(H2,S1,W2,V1), c(E2,S2,H2,V2).
+  c(H1,V1,W1,N1), c(E1,V2,H1,N2), c(h,S1,W2,V1), c(E2,S2,h,V2),
+    :- c(H1,V1,W1,N1), c(E1,V2,H1,N2), c(H2,S1,W2,V1), c(E2,S2,H2,V2).
+  c(H1,V1,W1,N1), c(E1,V2,H1,N2), c(H2,S1,W2,V1), h(V2), h(H2)
+    :- c(H1,V1,W1,N1), c(E1,V2,H1,N2), c(H2,S1,W2,V1), c(E2,S2,H2,V2), h(E2), h(S2).
+} nonterminal {
+  mesh, h(R),
+  r(R), d(R), rd(R), dr(R)
+}
+</pre>

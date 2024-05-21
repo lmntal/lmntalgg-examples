@@ -1,0 +1,20 @@
+<h4>Skip List with Constraint</h4>
+<p>In a skip list having the following type, each “express” edge cannot skip more than 3 nodes at once. This type is monotonic by a weighting function \(w(x)\) s.t. \(w(\texttt{n}/2)=6\), and otherwise \(w(x) = 1\).</p>
+<pre>
+defshape sl3(L,E){
+  s@@ sl3(L,E) :- sl(L,E,s(s(s(z))),z).
+
+  c1@@ sl(L,E,s(X),Y) :- sl(c(L),E,X,s(Y)).
+  e1@@ sl(L,E,X,Y) :- sle(L,E,X,Y).
+  n1@@ sl(L,E,X,Y) :- sln(L,E,X,Y).
+
+  e2@@ sle(L,E,s(X),Y) :- sle(L,E,X,s(Y)).
+  e3@@ sle(L,E,z,Y) :- e(L,E,L2,E2), sl(L2,E2,Y,z).
+
+  n2@@ sln(L,E,s(X),Y) :- sln(L,E,X,s(Y)).
+  n3@@ sln(L,E,z,s(s(s(z)))) :- n(L,E).
+} nonterminal {
+  sl3(L,E), sl(A,B,C,D), z(A), s(A,B), sle(A,B,C,D), sln(A,B,C,D)
+}
+</pre>
+

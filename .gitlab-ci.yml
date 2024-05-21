@@ -1,0 +1,7 @@
+test: 
+  script:
+    - pwd
+    - ls
+    - npm i
+    - gulp
+    - scp html/examples.html yamamoto@padano:/home/yamamoto/public_html/lmntalgg/

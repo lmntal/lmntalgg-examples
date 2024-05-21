@@ -1,0 +1,20 @@
+{
+  "name": "aplas2019-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yamamoto",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-ejs": "^4.1.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

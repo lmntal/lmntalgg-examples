@@ -1,0 +1,9 @@
+<h4>Skip List</h4>
+<p>is a linked-list with additional edges skipping some nodes.</p>
+<pre>
+defshape skiplist(List2,List1){
+  p0@@ skiplist(L2,L1) :- nil(L2,L1).
+  p1@@ skiplist(L2,L1) :- node1(X1,L1),skiplist(L2,X1).
+  p2@@ skiplist(L2,L1) :- node2(X1,X2,L2,L1),skiplist(X2,X1).
+}
+</pre>

@@ -3,7 +3,7 @@
 <style>
 body {
   padding-top: 70px;
-  background-color: #eee;
+  background-color: #e0e0e0;
   margin-bottom: 10px;
   margin:0;
   width: 100%;
@@ -18,11 +18,15 @@ article {
   padding: 10px;
   margin-bottom: 10px;
 }
+article > h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 pre {
   margin: 0;
   padding: 10px;
   border-radius : 10px;
-  background-color: #eee;
+  background-color: #ddd;
 }
 footer{
   margin: 20px auto;
@@ -63,9 +67,10 @@ a{
 </nav>
 
 <div id="container" class="container-fluid">
-  <h2>Example Type Definitions of LMNtal ShapeType</h2>
-  <p>Our type checking framework, LMNtal ShapeType, can express various graph structures.</p>
-  <p><a href="https://github.com/lmntal/shapetype">For more examples and the prototype implementation of the type checker, click here and access our GitHub repository.</a></p>
+  <h2>Examples of LMNtalGG</h2>
+  <p>We proposed LMNtalGG as graph grammar on LMNtal, which can express various graph structures.<br/>
+    We also introduced the concept of difference types that gives types for difference data structures.</p>
+  <%# <p><a href="https://github.com/lmntal/shapetype">For more examples and the prototype implementation of the type checker, click here and access our GitHub repository.</a></p> %>
 
   <% for(const s of sects){ %>
   <section id="<%= s.name %>">

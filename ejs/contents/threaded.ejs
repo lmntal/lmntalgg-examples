@@ -1,8 +1,7 @@
 <h4>Threaded Tree</h4>
 <p>is a binary tree with additional edges each of which connects a node and its in-order successor. The free links H and T respectively stand for the head and tail of the difference list of all nodes in-order.</p>
+<h5>Production rules (disjoint)</h5>
 <pre>
-defshape threaded(H,T,R){
-  threaded(H,T,R) :- n(H1, threaded(H,H1), threaded(T1,T), T1, R).
-  threaded(H,T,R) :- l(H,T,R).
-}
+th1@@ R=tht(H,T) :- n(H1, threaded(H,H1), threaded(T1,T), T1, R).
+th2@@ R=tht(H,T) :- l(H,T,R).
 </pre>

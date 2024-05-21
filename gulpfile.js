@@ -7,27 +7,21 @@ var sects = [
   {
     name: "simple",
     title: "Simple (Algebraic) Data Types",
-    desc: "Algebraic data types, which can be typed in existing functional languages, can also be typed in LMNtal ShapeType.",
+    desc: "Algebraic data types, the main target of classical type systems in functional languages, can also be expressed by LMNtalGG.",
     files: ["list","tree"]
   },
   {
+    name: "multiple-roots",
+    title: "Data structures with multiple roots",
+    desc: "LMNtalGG can express data structures with two or more roots, i.e., graphs, whereas classical type systems in functional languages cannot.",
+    files: ["threaded", "skiplist"]
+  },
+  {
     name: "constraints",
-    title: "ShapeTypes with Constraints",
-    desc: "Since LMNtal ShapeType targets more than context-free types, it can handle constraints on the graph structure.",
-    files: ["rbtree", "lambda", "skip3"]
+    title: "LMNtalGGs with Constraints",
+    desc: "With indexed LMNtalGG, we can handle constraints on the graph structure.",
+    files: ["rbtree", "skip3"]
   },
-  {
-    name: "not-one-root",
-    title: "ShapeTypes with Not One Root",
-    desc: "A ShapeType can have two or more roots, while a data type in almost all functional languages cannot.",
-    files: ["dlist", "skiplist", "mesh", "threaded"]
-  },
-  {
-    name: "others",
-    title: "Other types",
-    desc: "LMNtal ShapeType can express even more data types.",
-    files: ["sensitive"]
-  }
 ]
 
 var date = require("moment")().format('LL');
@@ -43,5 +37,9 @@ gulp.task("ejs", done => {
     .pipe(gulp.dest("html"));
   done();
 });
+
+gulp.task("watch", ()=>{
+  gulp.watch(["./ejs/**/*.ejs"], gulp.series("ejs"))
+})
 
 gulp.task("default", gulp.series("ejs"));

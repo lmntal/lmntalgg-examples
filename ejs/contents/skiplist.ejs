@@ -1,9 +1,21 @@
 <h4>Skip List</h4>
-<p>is a linked-list with additional edges skipping some nodes.</p>
+<p>is a linked list with additional edges skipping some nodes.</p>
+<h5>Production rules (disjoint)</h5>
 <pre>
-defshape skiplist(List2,List1){
-  p0@@ skiplist(L2,L1) :- nil(L2,L1).
-  p1@@ skiplist(L2,L1) :- node1(X1,L1),skiplist(L2,X1).
-  p2@@ skiplist(L2,L1) :- node2(X1,X2,L2,L1),skiplist(X2,X1).
-}
+sl0@@ skiplist(L2,L1) :- nil(L2,L1).
+sl1@@ skiplist(L2,L1) :- node1(int,X1,L1),skiplist(L2,X1).
+sl2@@ skiplist(L2,L1) :- node2(int,X1,X2,L2,L1),skiplist(X2,X1).
 </pre>
+<h5>Example well-typed graphs</h5>
+<pre>
+node2(N1,Y1,Y2,L2,L1),node2(N2,X1,X2,Y2,Y1)
+  : skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)
+node2(N1,Y,X2,L2,L1),node1(N2,X1,Y)
+  : skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)
+</pre>
+<h5>Example well-typed rule</h5>
+<pre>
+node2(N1,Y1,Y2,L2,L1),node2(N2,X1,X2,Y2,Y1)
+  :- node2(N1,Y,X2,L2,L1),node1(N2,X1,Y)
+</pre>
+because both sides are typed <code>skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)</code> (see the typing above).

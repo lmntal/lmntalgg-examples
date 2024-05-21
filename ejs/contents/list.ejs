@@ -1,7 +1,11 @@
-<h4>Linked List</h4>
+<h4>Linked List of Integers</h4>
+<h5>Production rules (disjoint)</h5>
 <pre>
-defshape list(R){
-  p1@@ list(R) :- c(list,R).
-  p2@@ list(R) :- n(R).
-}
+ln@@ list(R) :- nil(R).
+lc@@ list(R) :- cons(int,list,R).
+</pre>
+<h5>Example well-typed graphs</h5>
+<pre>
+cons(3,cons(1,nil),R) : list(R)
+cons(3,cons(1,X),R)   : list(X) - list(R)
 </pre>

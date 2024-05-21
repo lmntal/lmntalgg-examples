@@ -1,7 +1,16 @@
 <h4>Binary Tree</h4>
+<h5>Production rules (disjoint)</h5>
 <pre>
-defshape tree(R){
-  p1@@ tree(R) :- n(tree,tree,R).
-  p2@@ tree(R) :- l(R).
-}
+tl@@ tree(R) :- l(R).
+tn@@ tree(R) :- n(int,tree,tree,R).
 </pre>
+<h5>Example well-typed graphs</h5>
+<pre>
+n(3,n(1,l,l),l,R) : tree(R)
+</pre>
+<h5>Example well-typed rules</h5>
+<pre>
+n(N1,n(N2,T1,T2),T3,R) :- n(N2,T1,n(N1,T2,T3),R).
+</pre>
+because both sides are typed <code>tree(R)-int(N1),int(N2),tree(T1),tree(T2),tree(T3)</code>.
+

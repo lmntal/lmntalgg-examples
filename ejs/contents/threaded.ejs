@@ -2,6 +2,10 @@
 <p>is a binary tree with additional edges each of which connects a node and its in-order successor. The free links H and T respectively stand for the head and tail of the difference list of all nodes in-order.</p>
 <h5>Production rules (disjoint)</h5>
 <pre>
-th1@@ R=tht(H,T) :- n(H1, threaded(H,H1), threaded(T1,T), T1, R).
-th2@@ R=tht(H,T) :- l(H,T,R).
+th1@@ R=tht(H,T) :- R=thl(H,T).
+th2@@ R=tht(H,T) :- R=thn(H1,tht(H,H1),tht(T1,T),T1).
+</pre>
+<h5>Example well-typed graphs</h5>
+<pre>
+R=thn(H1,thl(H,H1),P,T1) : tht(H,T,R) - tht(T1,T,P)
 </pre>

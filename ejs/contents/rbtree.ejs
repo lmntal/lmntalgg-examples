@@ -11,12 +11,20 @@ r@@ rbtree(1,$n,R) :- $n >= 0 |
 </pre>
 <h5>Example well-typed graphs</h5>
 <pre>
+b(S,leaf,R)
+  : rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1
 b(S,r(leaf,leaf),R)
   : rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1
+b(A,B,R)
+  : rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B)
+    where 0 =< $m = $n-1, $k = 0 or 1
 </pre>
-<h5>Example well-typed rule</h5>
+<h5>Example well-typed rules</h5>
 <pre>
-node2(N1,Y1,Y2,L2,L1),node2(N2,X1,X2,Y2,Y1)
-  :- node2(N1,Y,X2,L2,L1),node1(N2,X1,Y)
+b(S,leaf,R) :- b(S,r(leaf,leaf),R).
 </pre>
-because both sides are typed <code>skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)</code> (see the typing above).
+because both sides are typed <code>rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1</code>.
+<pre>
+b(A,B,R) :- b(B,A,R).
+</pre>
+because both sides are typed <code>rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B) where 0 =< $m = $n-1, $k = 0 or 1</code>.

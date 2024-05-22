@@ -20,7 +20,7 @@ var sects = [
     name: "constraints",
     title: "LMNtalGGs with Constraints",
     desc: "With indexed LMNtalGG, we can handle constraints on the graph structure.",
-    files: ["rbtree", "skip3"]
+    files: ["rbtree", "bst"]
   },
 ]
 

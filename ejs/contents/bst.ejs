@@ -1,0 +1,20 @@
+<h4>Binary Search Tree</h4>
+<p>is a binary tree with sorted elements. <code>bst($l,$r)</code> represents a binary search tree in which all the elements are in \([$l,$r)\).</p>
+<h5>Production rules (indexed)</h5>
+<pre>
+bst1@@ R = bst($l,$r) :- R = leaf.
+bst2@@ R = bst($l,$r) :- $l =< $x, $x < $r |
+       R = node($x,bst($l,$x),bst($x,$r)).
+</pre>
+<h5>Example well-typed graphs</h5>
+<pre>
+node(3,node(1,leaf,leaf),node(4,leaf,leaf),R) : bst($l,$r,R)
+</pre>
+<h5>Example well-typed rules</h5>
+<pre>
+</pre>
+because both sides are typed <code>rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1</code>.
+<pre>
+b(A,B,R) :- b(B,A,R).
+</pre>
+because both sides are typed <code>rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B) where 0 =< $m = $n-1, $k = 0 or 1</code>.

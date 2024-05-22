@@ -9,7 +9,7 @@ b@@ rbtree($k,$n,R) :-
 r@@ rbtree(1,$n,R) :- $n >= 0 |
   r(rbtree(0,$n),rbtree(0,$n),R).
 </pre>
-<h5>Example well-typed graphs</h5>
+<h5>Example: well-typed graphs</h5>
 <pre>
 b(S,leaf,R)
   : rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1
@@ -19,7 +19,7 @@ b(A,B,R)
   : rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B)
     where 0 =< $m = $n-1, $k = 0 or 1
 </pre>
-<h5>Example well-typed rules</h5>
+<h5>Example: well-typed rules</h5>
 <pre>
 b(S,leaf,R) :- b(S,r(leaf,leaf),R).
 </pre>

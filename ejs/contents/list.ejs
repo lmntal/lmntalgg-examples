@@ -4,7 +4,7 @@
 ln@@ list(R) :- nil(R).
 lc@@ list(R) :- cons(int,list,R).
 </pre>
-<h5>Example well-typed graphs</h5>
+<h5>Example: well-typed graphs</h5>
 <pre>
 cons(3,cons(1,nil),R) : list(R)
 cons(3,cons(1,X),R)   : list(X) - list(R)

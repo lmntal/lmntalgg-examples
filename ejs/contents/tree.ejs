@@ -4,11 +4,11 @@
 tl@@ tree(R) :- l(R).
 tn@@ tree(R) :- n(int,tree,tree,R).
 </pre>
-<h5>Example well-typed graphs</h5>
+<h5>Example: well-typed graphs</h5>
 <pre>
 n(3,n(1,l,l),l,R) : tree(R)
 </pre>
-<h5>Example well-typed rules</h5>
+<h5>Example: well-typed rules</h5>
 <pre>
 n(N1,n(N2,T1,T2),T3,R) :- n(N2,T1,n(N1,T2,T3),R).
 </pre>

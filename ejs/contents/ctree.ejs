@@ -1,0 +1,11 @@
+<h4>Complete Binary Tree</h4>
+<p>is a binary tree in which all the paths from root to leaf are the same length. <code>cbt($h,R)</code> represents a complete binary tree of height <code>$h</code>.</p>
+<h5>Production rules (indexed)</h5>
+<pre>
+cbt1@@ R=cbt($h) :- $h>0, $h1=$h-1 | R=node(int,cbt($h1),cbt($h1)).
+cbt2@@ R=cbt(0) :- R=leaf.
+</pre>
+<h5>Example: well-typed graph</h5>
+<pre>
+node(4,node(2,node(1,leaf,leaf),node(3,leaf,leaf)),node(6,node(5,leaf,leaf),node(7,leaf,leaf))) : cbt(3)
+</pre>

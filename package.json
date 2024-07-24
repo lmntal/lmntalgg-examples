@@ -9,8 +9,8 @@
   "author": "yamamoto",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-ejs": "^4.1.1",
+    "gulp": "^5.0.0",
+    "gulp-ejs": "^5.1.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0"
   },

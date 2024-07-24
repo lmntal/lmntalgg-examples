@@ -1,0 +1,212 @@
+
+
+<style>
+body {
+  padding-top: 70px;
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+  margin:0;
+  width: 100%;
+}
+#container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+article {
+  border-radius : 10px;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+article > h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+pre {
+  margin: 0;
+  padding: 10px;
+  border-radius : 10px;
+  background-color: #e0e0e0;
+}
+footer{
+  margin: 20px auto;
+}
+footer>*{
+  margin-bottom: 5px;
+}
+section{
+  display: block;
+  padding-top: 70px;
+  margin-top: -50px;
+}
+section>p{
+  margin-bottom: 10px;
+}
+a{
+  color: rgb(0, 82, 183)
+}
+</style>
+
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary">
+  <a href="#" class="navbar-brand">LMNtalGG Examples</a>
+  <button class="navbar-toggler" type="button"
+      data-toggle="collapse"
+      data-target="#navmenu1"
+      aria-controls="navmenu1"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navmenu1">
+    <div class="navbar-nav">
+    
+      <a class="nav-item nav-link" href="#simple">simple</a>
+    
+      <a class="nav-item nav-link" href="#multiple-roots">multiple-roots</a>
+    
+      <a class="nav-item nav-link" href="#constraints">constraints</a>
+    
+    </div>
+  </div>
+</nav>
+
+<div id="container" class="container-fluid">
+  <h2>Examples of LMNtalGG</h2>
+  <p>We proposed LMNtalGG as graph grammar on LMNtal, which can express various graph structures.<br/>
+    We also introduced the concept of difference types that gives types for difference data structures.</p>
+  
+
+  
+  <section id="simple">
+  <h3>Simple (Algebraic) Data Types</h3>
+  <p>Algebraic data types, the main target of classical type systems in functional languages, can also be expressed by LMNtalGG.</p>
+  
+  <article id="list">
+  <h4>Linked List of Integers</h4>
+<h5>Production rules (disjoint)</h5>
+<pre>ln@@ list(R) :- nil(R).
+lc@@ list(R) :- cons(int,list,R).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>cons(3,cons(1,nil),R) : list(R)
+cons(3,cons(1,X),R)   : list(X) - list(R)</pre>
+
+  </article>
+  
+  <article id="tree">
+  <h4>Binary Tree</h4>
+<h5>Production rules (disjoint)</h5>
+<pre>tl@@ tree(R) :- l(R).
+tn@@ tree(R) :- n(int,tree,tree,R).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>n(3,n(1,l,l),l,R) : tree(R)</pre>
+<h5>Example: well-typed rules</h5>
+<pre>n(N1,n(N2,T1,T2),T3,R) :- n(N2,T1,n(N1,T2,T3),R).</pre>
+because both sides are typed <code>tree(R)-int(N1),int(N2),tree(T1),tree(T2),tree(T3)</code>.
+
+
+  </article>
+  
+  </section>
+  
+  <section id="multiple-roots">
+  <h3>Data structures with multiple roots</h3>
+  <p>LMNtalGG can express data structures with two or more roots, i.e., graphs, whereas classical type systems in functional languages cannot.</p>
+  
+  <article id="threaded">
+  <h4>Threaded Tree</h4>
+<p>is a binary tree with additional edges each of which connects a node and its in-order successor. The free links H and T respectively stand for the head and tail of the difference list of all nodes in-order.</p>
+<h5>Production rules (disjoint)</h5>
+<pre>th1@@ R=tht(H,T) :- R=thl(H,T).
+th2@@ R=tht(H,T) :- R=thn(H1,tht(H,H1),tht(T1,T),T1).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>R=thn(H1,thl(H,H1),P,T1) : tht(H,T,R) - tht(T1,T,P)</pre>
+
+  </article>
+  
+  <article id="skiplist">
+  <h4>Skip List</h4>
+<p>is a linked list with additional edges skipping some nodes.</p>
+<h5>Production rules (disjoint)</h5>
+<pre>sl0@@ skiplist(L2,L1) :- nil(L2,L1).
+sl1@@ skiplist(L2,L1) :- node1(int,X1,L1),skiplist(L2,X1).
+sl2@@ skiplist(L2,L1) :- node2(int,X1,X2,L2,L1),skiplist(X2,X1).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>node2(N1,Y1,Y2,L2,L1),node2(N2,X1,X2,Y2,Y1)
+  : skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)
+node2(N1,Y,X2,L2,L1),node1(N2,X1,Y)
+  : skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)</pre>
+<h5>Example: well-typed rule</h5>
+<pre>node2(N1,Y1,Y2,L2,L1),node2(N2,X1,X2,Y2,Y1)
+  :- node2(N1,Y,X2,L2,L1),node1(N2,X1,Y)</pre>
+because both sides are typed <code>skiplist(L2,L1) - int(N1),int(N2),skiplist(X2,X1)</code> (see the typing above).
+
+  </article>
+  
+  </section>
+  
+  <section id="constraints">
+  <h3>LMNtalGGs with Constraints</h3>
+  <p>With indexed LMNtalGG, we can handle constraints on the graph structure.</p>
+  
+  <article id="rbtree">
+  <h4>Red-Black Tree</h4>
+<p>is a binary tree with colored nodes. It has a constraint on occurance of nodes: (i) the root and leafs must be black, (ii) red nodes' children must be black, and (iii) the number of black nodes on the path from a node to every leaf must be constant.</p>
+<h5>Production rules (indexed)</h5>
+<pre>l@@ rbtree($k,0,R) :- $k >= 0, $k =< 1 | leaf(R).
+b@@ rbtree($k,$n,R) :-
+  $m >= 0, $m = $n-1, $k >= 0, $k =< 1 |
+  b(rbtree(1,$m),rbtree(1,$m),R).
+r@@ rbtree(1,$n,R) :- $n >= 0 |
+  r(rbtree(0,$n),rbtree(0,$n),R).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>b(S,leaf,R)
+  : rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1
+b(S,r(leaf,leaf),R)
+  : rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1
+b(A,B,R)
+  : rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B)
+    where 0 =< $m = $n-1, $k = 0 or 1</pre>
+<h5>Example: well-typed rules</h5>
+<pre>b(S,leaf,R) :- b(S,r(leaf,leaf),R).</pre>
+because both sides are typed <code>rbtree($k1,1,R) - rbtree(1,0,S) where $k1 = 0 or 1</code>.
+<pre>b(A,B,R) :- b(B,A,R).</pre>
+because both sides are typed <code>rbtree($k,$n,R) - rbtree(1,$m,A),rbtree(1,$m,B) where 0 =< $m = $n-1, $k = 0 or 1</code>.
+
+  </article>
+  
+  <article id="bst">
+  <h4>Binary Search Tree</h4>
+<p>is a binary tree with sorted elements. <code>bst($l,$r,R)</code> represents a binary search tree in which all the elements are in \([$l,$r]\).</p>
+<h5>Production rules (indexed)</h5>
+<pre>bst1@@ R = bst($l,$r) :- R = leaf.
+bst2@@ R = bst($l,$r) :- $l =< $x, $x <= $r |
+       R = node($x,bst($l,$x),bst($x,$r)).</pre>
+<h5>Example: well-typed graphs</h5>
+<pre>node(3,node(1,leaf,leaf),node(4,leaf,leaf),R) : bst($l,$r,R) where $l =< 1, $r >= 4</pre>
+<h5>Example: well-typed rule</h5>
+<pre>R=node($n2,node($n1,X,Y),Z) :- R=node($n1,X,node($n2,Y,Z))</pre>
+because both sides are typed <code>bst($l,$r,R) - bst($l,$n1,X),bst($n1,$n2,Y),bst($n2,$r,Z) where $l =< $n1 =< $n2 =< $r</code>.
+
+  </article>
+  
+  <article id="ctree">
+  <h4>Complete Binary Tree</h4>
+<p>is a binary tree in which all the paths from root to leaf are the same length. <code>cbt($h,R)</code> represents a complete binary tree of height <code>$h</code>.</p>
+<h5>Production rules (indexed)</h5>
+<pre>cbt1@@ R=cbt($h) :- $h>0, $h1=$h-1 | R=node(int,cbt($h1),cbt($h1)).
+cbt2@@ R=cbt(0) :- R=leaf.</pre>
+<h5>Example: well-typed graph</h5>
+<pre>node(4,node(2,node(1,leaf,leaf),node(3,leaf,leaf)),node(6,node(5,leaf,leaf),node(7,leaf,leaf))) : cbt(3)</pre>
+
+  </article>
+  
+  </section>
+  
+  <footer>
+    <address>
+      Contact me: yamamoto (at) ueda.info.waseda.ac.jp
+    </address>
+    <p>Last modified: July 24, 2024</p>
+  </footer>
+</div>
+

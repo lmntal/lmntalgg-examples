@@ -34,7 +34,7 @@ gulp.task("ejs", done => {
     .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, "$1"))
     .pipe(replace(/\s*(<\/pre>)/g, "$1"))
     .pipe(replace(/(<pre[\s\S]*?>)\s*/g, "$1"))
-    .pipe(gulp.dest("html"));
+    .pipe(gulp.dest("docs"));
   done();
 });
 
